@@ -1,28 +1,27 @@
 #include "rider.h"
 
-rider::rider(int riderid,string ridername,string pickup, string dropoff){
+Rider::Rider(int riderid,string ridername,string pickup, string dropoff){
     ID = riderid;
     Name = ridername;
     Pickuploc = pickup;
     Dropoffloc = dropoff;
 }
 
-int rider::getId() const{
+int Rider::getId() const{
 return ID;
 }
-string rider::getname() const{
+string Rider::getname() const{
     return Name;
 }
-string rider::getpickup() const{
+string Rider::getpickup() const{
     return Pickuploc;
 }
-string rider:: getdropoff() const{
+string Rider:: getdropoff() const{
     return Dropoffloc;
 }
-void rider::setpickup(string pickup){
+void Rider::setpickup(string pickup){
 Pickuploc = pickup;
 }
-void rider::setdropoff(string dropoff){
+void Rider::setdropoff(string dropoff){
     Dropoffloc = dropoff;
 }
-
