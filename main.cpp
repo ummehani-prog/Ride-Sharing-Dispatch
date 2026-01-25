@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
 
-#include "Driver.h"
-#include "Rider.h"
-#include "Trip.h"
+#include "driver.h"
+#include "rider.h"
+#include "trip.h"
 #include "DispatchEngine.h"
 
 using namespace std;
@@ -16,7 +16,7 @@ int main() {
     vector<Rider*> riders;
     vector<Trip*> trips;
 
-    int choice;
+    int choice = 0;
     int driverId = 0, riderId = 0, tripId = 0;
 
     do {
@@ -77,10 +77,10 @@ int main() {
             cout << "Enter Trip ID: ";
             cin >> id;
 
-            if (id > 0 && id <= trips.size()) {
+            if (id > 0 && id <= (int)trips.size()) {
                 Driver* d = engine.findDriverForTrip(trips[id - 1]);
 
-                if (d != NULL) {
+                if (d != nullptr) {
                     cout << "Driver Assigned: " << d->getName() << endl;
                 } else {
                     cout << "No available driver found.\n";
@@ -92,11 +92,11 @@ int main() {
 
         // -------- SHOW TRIPS --------
         else if (choice == 4) {
-            for (int i = 0; i < trips.size(); i++) {
+            for (int i = 0; i < (int)trips.size(); i++) {
                 cout << "\nTrip ID: " << trips[i]->getTripId();
                 cout << "\nRider: " << trips[i]->getRider()->getname();
 
-                if (trips[i]->getDriver() != NULL)
+                if (trips[i]->getDriver() != nullptr)
                     cout << "\nDriver: " << trips[i]->getDriver()->getName();
                 else
                     cout << "\nDriver: Not Assigned";
