@@ -37,6 +37,8 @@ public:
     void startTrip();
     void completeTrip(int dist);
     void cancelTrip();
+    void setState(TripState s);
+    void setDriver(Driver* d);
 };
 
 #endif

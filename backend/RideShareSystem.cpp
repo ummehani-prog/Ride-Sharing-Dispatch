@@ -1,7 +1,7 @@
 #include "RideShareSystem.h"
 #include <iostream>
 
-RideShareSystem::RideShareSystem(string cityName) : city(cityName) {}
+RideShareSystem::RideShareSystem() : dispatch(&city) {}
 
 void RideShareSystem::addDriver(Driver* d) {
     drivers.push_back(d);
@@ -70,7 +70,7 @@ void RideShareSystem::completeTrip(Trip* t) {
         t->setState(TripState::ASSIGNED);
         if (d) {
             d->setAvailable(false);
-            d->decrementTrips(); // agar aisa function bana lo
+            d->decrementTrips();
         }
     };
     rollbackMgr.recordAction(undo);
@@ -85,4 +85,44 @@ void RideShareSystem::completeTrip(Trip* t) {
 // Rollback
 void RideShareSystem::rollbackLast(int k) {
     rollbackMgr.rollback(k);
+}
+
+// Analytics
+double RideShareSystem::getAvgTripDistance() {
+    if (trips.empty()) return 0.0;
+    long totalDist = 0;
+    int count = 0;
+    for (auto t : trips) {
+        if (t->getState() == TripState::COMPLETED) {
+            totalDist += t->getDistance(); // Ensure Trip has stored distance
+            count++;
+        }
+    }
+    return count > 0 ? (double)totalDist / count : 0.0;
+}
+
+void RideShareSystem::showDriverUtilization() {
+    cout << "\n--- Driver Utilization ---\n";
+    for (auto d : drivers) {
+        cout << "Driver " << d->getName() << ": " << d->getCompletedTrips() << " trips\n";
+    }
+}
+
+void RideShareSystem::showTripStatus() {
+    int req = 0, ass = 0, ong = 0, comp = 0, canc = 0;
+    for (auto t : trips) {
+        switch (t->getState()) {
+            case REQUESTED: req++; break;
+            case ASSIGNED: ass++; break;
+            case ONGOING: ong++; break;
+            case COMPLETED: comp++; break;
+            case CANCELLED: canc++; break;
+        }
+    }
+    cout << "\n--- Trip Status Report ---\n";
+    cout << "Requested: " << req << endl;
+    cout << "Assigned: " << ass << endl;
+    cout << "Ongoing: " << ong << endl;
+    cout << "Completed: " << comp << endl;
+    cout << "Cancelled: " << canc << endl;
 }

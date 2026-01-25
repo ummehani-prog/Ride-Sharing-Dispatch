@@ -59,3 +59,11 @@ void Trip::cancelTrip() {
         state = CANCELLED;
     }
 }
+
+void Trip::setState(TripState s) {
+    state = s;
+}
+
+void Trip::setDriver(Driver* d) {
+    driver = d;
+}

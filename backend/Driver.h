@@ -27,6 +27,7 @@ public:
     void setLocation(string loc);
     void setAvailable(bool status);
     void incrementTrips();
+    void decrementTrips();
 };
 
 #endif

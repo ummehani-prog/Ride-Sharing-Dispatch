@@ -20,7 +20,8 @@ private:
     RollbackManager rollbackMgr;
 
 public:
-    RideShareSystem(string cityName);
+    City* getCity() { return &city; }
+    RideShareSystem();
 
     void addDriver(Driver* d);
     void requestTrip(Trip* t);
@@ -28,6 +29,11 @@ public:
     void cancelTrip(Trip* t);
     void completeTrip(Trip* t);
     void rollbackLast(int k = 1);
+    
+    // Analytics
+    double getAvgTripDistance();
+    void showDriverUtilization();
+    void showTripStatus();
 };
 
 #endif

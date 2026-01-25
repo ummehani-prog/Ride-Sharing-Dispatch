@@ -7,13 +7,18 @@
 
 using namespace std;
 
+#include "City.h"
+
 class DispatchEngine {
 private:
     vector<Driver*> drivers;
+    City* cityMap;
 
 public:
+    DispatchEngine(City* city) : cityMap(city) {}
     void addDriver(Driver* d);
     Driver* findDriverForTrip(Trip* trip);
 };
+
 
 #endif

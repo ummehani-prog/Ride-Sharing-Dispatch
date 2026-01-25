@@ -1,4 +1,4 @@
-#include "rider.h"
+#include "Rider.h"
 
 Rider::Rider(int riderid,string ridername,string pickup, string dropoff){
     ID = riderid;

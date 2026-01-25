@@ -1,7 +1,7 @@
-#include "driver.h"
+#include "Driver.h"
 Driver::Driver(int driverId, string drivername,string loc,string zone){
     id = driverId;
-    name = driverId;
+    name = drivername;
     location = loc;
     Zone = zone;
     available = true;
@@ -36,4 +36,7 @@ available = status;
 }
 void Driver::incrementTrips(){
 completedTrips++;
+}
+void Driver::decrementTrips(){
+    if (completedTrips > 0) completedTrips--;
 }
